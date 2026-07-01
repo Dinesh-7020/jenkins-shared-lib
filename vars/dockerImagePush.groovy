@@ -5,13 +5,13 @@ def call(String project, String ImageTag, String hubUser){
             passwordVariable: "PASS"
     )]) {
         sh '''
-            echo "USER=$USER"
-            echo "PASS_LENGHT=${#PASS}"
-            printf '%s' "$PASS" | docker login -u "$USER" --password-stdin
+           printf '%s' "$PASS" | docker login -u "$USER" --password-stdin
         '''
     }
     //sh "docker image push ${hubUser}/${project}:${ImageTag}"
-    sh "docker image push ${hubUser}/${project}:latest"   
+    sh "docker image push ${hubUser}/${project}:latest" 
+
+    sh 'docker logout'
 }
 
 
